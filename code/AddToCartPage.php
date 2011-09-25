@@ -46,6 +46,7 @@ class AddToCartPage_Controller extends Page_Controller {
 	function init() {
 		parent::init();
 		Requirements::themedCSS('Products');
+		Requirements::themedCSS('AddToCartPage');
 	}
 
 	function TopLevelGroups() {
