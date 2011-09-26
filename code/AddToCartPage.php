@@ -51,6 +51,7 @@ class AddToCartPage_Controller extends Page_Controller {
 
 	function TopLevelGroups() {
 		if($dos = DataObject::get("ProductGroup", "\"ParentID\" = 0 AND ".$this->ProductsAndGroupsToBeExcludedWhereString())) {
+			echo "A";
 			return $dos;
 		}
 		else {
@@ -58,11 +59,13 @@ class AddToCartPage_Controller extends Page_Controller {
 			if(Versioned::current_stage() == "Live") {
 				$stage = "_Live";
 			}
-			if($dos = DataObject::get("ProductGroup", "ParentPage.ID = 0 AND ".$this->ProductsAndGroupsToBeExcludedWhereString(), "", "INNER JOIN SiteTree$stage AS ParentPage ON SiteTree$stage.ParentID = ParentPage.ID")) {
+			echo "B";
+			if($dos = DataObject::get("ProductGroup", "ParentPage.ParentID = 0 AND ".$this->ProductsAndGroupsToBeExcludedWhereString(), "", "INNER JOIN SiteTree$stage AS ParentPage ON SiteTree$stage.ParentID = ParentPage.ID")) {
 				return $dos;
 			}
 			else {
-				return DataObject::get("ProductGroup", "GrandParentPage.ID = 0 AND ".$this->ProductsAndGroupsToBeExcludedWhereString(), "", "INNER JOIN SiteTree$stage AS ParentPage ON SiteTree$stage.ParentID = ParentPage.ID INNER JOIN SiteTree$stage AS GrandParentPage ON ParentPage.ParentID = GrandParentPage.ID");
+				echo "C";
+				return DataObject::get("ProductGroup", "GrandParentPage.ParentID = 0 AND ".$this->ProductsAndGroupsToBeExcludedWhereString(), "", "INNER JOIN SiteTree$stage AS ParentPage ON SiteTree$stage.ParentID = ParentPage.ID INNER JOIN SiteTree$stage AS GrandParentPage ON ParentPage.ParentID = GrandParentPage.ID");
 			}
 		}
 	}
