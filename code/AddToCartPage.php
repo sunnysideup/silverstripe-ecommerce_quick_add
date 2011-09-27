@@ -47,6 +47,7 @@ class AddToCartPage_Controller extends Page_Controller {
 		parent::init();
 		Requirements::themedCSS('Products');
 		Requirements::themedCSS('AddToCartPage');
+		Requirements::javascript("ecommerce_quick_add/javascript/AddToCartPage.js");
 	}
 
 	function TopLevelGroups() {
