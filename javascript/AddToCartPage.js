@@ -17,6 +17,18 @@ var AddToCartPage = {
 			}
 		);
 		jQuery("UL.level1").slideDown();
+		jQuery(".moreInformation a").click(
+			function() {
+				var url = jQuery(this).attr("href");
+				var domElement = jQuery(this).attr("rel");
+				jQuery.get(
+					url,
+					function(html) {
+						jQuery(domElement).html(data);
+					}
+				);
+			}
+		);
 	}
 
 
