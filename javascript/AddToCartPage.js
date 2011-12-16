@@ -22,7 +22,7 @@ var AddToCartPage = {
 
 	moreInfoHolderSelector: ".moreInfoHolder",
 
-	moreInfoLinkSelector: ".moreInformation a",
+	moreInfoLinkSelector: ".productLink",
 
 	init: function(){
 		jQuery(AddToCartPage.ulGroupsSelector).hide();
@@ -44,12 +44,12 @@ var AddToCartPage = {
 					jQuery(domElement).slideToggle();
 				}
 				else {
-					jQuery(parentElement).addClass(AddToCartPage.loading);
+					jQuery(parentElement).addClass(AddToCartPage.loadingClass);
 					jQuery.get(
 						url,
 						function(html) {
 							jQuery(domElement).html(html).addClass(AddToCartPage.completedClass).slideDown();
-							jQuery(parentElement).removeClass(AddToCartPage.loading);
+							jQuery(parentElement).removeClass(AddToCartPage.loadingClass);
 						}
 					);
 				}

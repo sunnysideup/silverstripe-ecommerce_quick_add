@@ -12,9 +12,8 @@
 				<ul class="ULproducts level2">
 				<% control DirectChildProducts %>
 					<li class="productItem">
-						<a href="$Link" class="productLink" rel="$ID">$Title</a>
+						<a href="$Link" class="productLink" rel="MoreInfo$ID">$Title</a>
 						<div class="productActionsOuter">
-							<p class="moreInformation"><a href="$Link" rel="MoreInfo$ID">more info ...</a></p>
 							<div id="MoreInfo$ID" class="moreInfoHolder"></div>
 						</div>
 					</li>
@@ -30,9 +29,8 @@
 						<ul class="ULproducts level3">
 						<% control DirectChildProducts %>
 							<li class="productItem">
-								<a href="$link" class="productLink" rel="$ID">$Title</a>
+								<a href="$Link" class="productLink" rel="MoreInfo$ID">$Title</a>
 								<div class="productActionsOuter">
-									<p class="moreInformation"><a href="$Link" rel="MoreInfo$ID">more info ...</a></p>
 									<div id="MoreInfo$ID" class="moreInfoHolder"></div>
 								</div>
 							</li>
@@ -48,9 +46,8 @@
 								<ul class="ULproducts level4">
 								<% control DirectChildProducts %>
 									<li class="productItem">
-										<a href="$link" class="productLink" rel="$ID">$Title</a>
+										<a href="$Link" class="productLink" rel="MoreInfo$ID">$Title</a>
 										<div class="productActionsOuter">
-											<p class="moreInformation"><a href="$Link" rel="MoreInfo$ID">more info ...</a></p>
 											<div id="MoreInfo$ID" class="moreInfoHolder"></div>
 										</div>
 									</li>
@@ -66,9 +63,8 @@
 										<ul class="ULproducts level5">
 										<% control DirectChildProducts %>
 											<li class="productItem">
-												<a href="$link" class="productLink" rel="$ID">$Title</a>
+												<a href="$Link" class="productLink" rel="MoreInfo$ID">$Title</a>
 												<div class="productActionsOuter">
-													<p class="moreInformation"><a href="$Link" rel="MoreInfo$ID">more info ...</a></p>
 													<div id="MoreInfo$ID" class="moreInfoHolder"></div>
 												</div>
 											</li>
@@ -84,9 +80,8 @@
 												<ul class="ULproducts level6">
 												<% control DirectChildProducts %>
 													<li class="productItem">
-														<a href="$link" class="productLink" rel="$ID">$Title</a>
+														<a href="$Link" class="productLink" rel="MoreInfo$ID">$Title</a>
 														<div class="productActionsOuter">
-															<p class="moreInformation"><a href="$Link" rel="MoreInfo$ID">more info ...</a></p>
 															<div id="MoreInfo$ID" class="moreInfoHolder"></div>
 														</div>
 													</li>
