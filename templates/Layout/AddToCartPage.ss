@@ -1,7 +1,9 @@
 <div id="Sidebar">
+	<div class="sidebarTop"></div>
 	<% include Sidebar_Cart %>
+	<div class="sidebarBottom"></div>
 </div>
-<div id="ProductGroup">
+<div id="ProductGroup" class="mainSection">
 	$Content
 	<% if TopLevelGroups %>
 		<ul class="ULgroups level1">
