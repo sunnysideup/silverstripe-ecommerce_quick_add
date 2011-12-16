@@ -14,9 +14,8 @@
 					<li class="productItem">
 						<a href="$Link" class="productLink" rel="$ID">$Title</a>
 						<div class="productActionsOuter">
-							<% include ProductActions %>
 							<p class="moreInformation"><a href="$Link" rel="MoreInfo$ID">more info ...</a></p>
-							<div id="MoreInfo$ID"></div>
+							<div id="MoreInfo$ID" class="moreInfoHolder"></div>
 						</div>
 					</li>
 				<% end_control %>
@@ -33,9 +32,8 @@
 							<li class="productItem">
 								<a href="$link" class="productLink" rel="$ID">$Title</a>
 								<div class="productActionsOuter">
-									<% include ProductActions %>
 									<p class="moreInformation"><a href="$Link" rel="MoreInfo$ID">more info ...</a></p>
-									<div id="MoreInfo$ID"></div>
+									<div id="MoreInfo$ID" class="moreInfoHolder"></div>
 								</div>
 							</li>
 						<% end_control %>
@@ -52,9 +50,8 @@
 									<li class="productItem">
 										<a href="$link" class="productLink" rel="$ID">$Title</a>
 										<div class="productActionsOuter">
-											<% include ProductActions %>
 											<p class="moreInformation"><a href="$Link" rel="MoreInfo$ID">more info ...</a></p>
-											<div id="MoreInfo$ID"></div>
+											<div id="MoreInfo$ID" class="moreInfoHolder"></div>
 										</div>
 									</li>
 								<% end_control %>
@@ -71,9 +68,8 @@
 											<li class="productItem">
 												<a href="$link" class="productLink" rel="$ID">$Title</a>
 												<div class="productActionsOuter">
-													<% include ProductActions %>
 													<p class="moreInformation"><a href="$Link" rel="MoreInfo$ID">more info ...</a></p>
-													<div id="MoreInfo$ID"></div>
+													<div id="MoreInfo$ID" class="moreInfoHolder"></div>
 												</div>
 											</li>
 										<% end_control %>
@@ -90,9 +86,8 @@
 													<li class="productItem">
 														<a href="$link" class="productLink" rel="$ID">$Title</a>
 														<div class="productActionsOuter">
-															<% include ProductActions %>
 															<p class="moreInformation"><a href="$Link" rel="MoreInfo$ID">more info ...</a></p>
-															<div id="MoreInfo$ID"></div>
+															<div id="MoreInfo$ID" class="moreInfoHolder"></div>
 														</div>
 													</li>
 												<% end_control %>
