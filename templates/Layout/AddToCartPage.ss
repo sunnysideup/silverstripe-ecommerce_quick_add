@@ -110,9 +110,9 @@
 		<% end_control %>
 		</ul>
 	<% end_if %>
-	<% if CheckoutLink %>
+	<% if EcomConfig.CheckoutLink %>
 	<p id="CheckoutLink">
-		<a href="$CheckoutLink">Continue to Checkout</a>
+		<a href="$EcomConfig.CheckoutLink">Continue to Checkout</a>
 	</p>
 	<% end_if %>
 
