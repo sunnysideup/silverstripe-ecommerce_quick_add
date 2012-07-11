@@ -14,7 +14,7 @@
 				<ul class="ULproducts level2">
 				<% control DirectChildProducts %>
 					<li class="productItem">
-						<a href="$Link" class="productLink" rel="MoreInfo$ID">$Title</a>
+						<a href="$AjaxLink" class="productLink" rel="MoreInfo$ID">$Title</a>
 						<div class="productActionsOuter">
 							<div id="MoreInfo$ID" class="moreInfoHolder"></div>
 						</div>
@@ -31,7 +31,7 @@
 						<ul class="ULproducts level3">
 						<% control DirectChildProducts %>
 							<li class="productItem">
-								<a href="$Link" class="productLink" rel="MoreInfo$ID">$Title</a>
+								<a href="$AjaxLink" class="productLink" rel="MoreInfo$ID">$Title</a>
 								<div class="productActionsOuter">
 									<div id="MoreInfo$ID" class="moreInfoHolder"></div>
 								</div>
@@ -48,7 +48,7 @@
 								<ul class="ULproducts level4">
 								<% control DirectChildProducts %>
 									<li class="productItem">
-										<a href="$Link" class="productLink" rel="MoreInfo$ID">$Title</a>
+										<a href="$AjaxLink" class="productLink" rel="MoreInfo$ID">$Title</a>
 										<div class="productActionsOuter">
 											<div id="MoreInfo$ID" class="moreInfoHolder"></div>
 										</div>
@@ -65,7 +65,7 @@
 										<ul class="ULproducts level5">
 										<% control DirectChildProducts %>
 											<li class="productItem">
-												<a href="$Link" class="productLink" rel="MoreInfo$ID">$Title</a>
+												<a href="$AjaxLink" class="productLink" rel="MoreInfo$ID">$Title</a>
 												<div class="productActionsOuter">
 													<div id="MoreInfo$ID" class="moreInfoHolder"></div>
 												</div>
@@ -82,7 +82,7 @@
 												<ul class="ULproducts level6">
 												<% control DirectChildProducts %>
 													<li class="productItem">
-														<a href="$Link" class="productLink" rel="MoreInfo$ID">$Title</a>
+														<a href="$AjaxLink" class="productLink" rel="MoreInfo$ID">$Title</a>
 														<div class="productActionsOuter">
 															<div id="MoreInfo$ID" class="moreInfoHolder"></div>
 														</div>
