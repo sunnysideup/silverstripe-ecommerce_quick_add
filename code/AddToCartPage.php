@@ -41,11 +41,12 @@ class AddToCartPage_Controller extends Page_Controller {
 		$currentCustomer = $order->CreateOrReturnExistingMember(false);
 		if($member && $member->IsShopAdmin()) {
 			$fields = new FieldSet(
+				new HeaderField("SelectCustomer", _t("AddToCartPage.SELECTCUSTOMER", "Select Customer")),
 				new DropdownField("MemberID", _t("AddToCartPage.CUSTOMER", "Customer"), EcommerceRole::list_of_customers()),
 				new ReadonlyField("CurrentMember", _t("AddToCartPage.CURRENTCUSTOMER", "Current Customer"), $currentCustomer->getTitle())
 			);
 			$actions = new FieldSet(
-				new FormAction("addmembertocartform_add", _t("AddToCartPage.ADDMEMBERTOORDER", "Add Customer to current order"))
+				new FormAction("addmembertocartform_add", _t("AddToCartPage.ADDMEMBERTOORDER", "Add customer to current order"))
 			);
 			$validator = new RequiredFields(array("MemberID"));
 			return new Form($this, "AddMemberToCartForm", $fields, $actions, $validator);
@@ -79,6 +80,7 @@ class AddToCartPage_Controller extends Page_Controller {
 
 	function QuickAddToCartForm(){
 		$fields = new FieldSet(
+			new HeaderField("SelectCustomer", _t("AddToCartPage.ADDPRODUCTS", "Add Products")),
 			new HiddenField("BuyableID"),
 			new HiddenField("BuyableClassName"),
 			new HiddenField("Version"),
@@ -88,7 +90,7 @@ class AddToCartPage_Controller extends Page_Controller {
 		$actions = new FieldSet(
 			new FormAction("quickaddtocartform_add", _t("AddToCartPage.ADD", "Add"))
 		);
-		$validator = new RequiredFields(array("BuyableID", "BuyableClassName", "Version", "Quantity"));
+		$validator = new RequiredFields(array("Quantity"));
 		return new Form($this, "QuickAddToCartForm", $fields, $actions, $validator);
 	}
 
@@ -97,15 +99,24 @@ class AddToCartPage_Controller extends Page_Controller {
 		$buyableClassName = Convert::raw2sql($data["BuyableClassName"]);
 		$version = Intval($data["Version"]);
 		$quantity = floatval($data["Quantity"]);
-		$buyable = DataObject::get_by_id($buyableClassName, $buyableID);
-		$orderItem = $buyable->OrderItem();
-		$orderItem->Quantity = $quantity;
-		$orderItem->Version = $version;
-		$orderItem->write();
+		$status = "bad";
+		$response = _t("AddToCartPage.ERRORPRODUCTNOTADDED", "ERROR: Product Not Added - make sure to find a product first.");
+		if(class_exists($buyableClassName) && EcommerceDBConfig::is_buyable($buyableClassName)) {
+			$buyable = DataObject::get_by_id($buyableClassName, $buyableID);
+			if($buyable) {
+				$orderItem = $buyable->OrderItem();
+				$orderItem->Quantity = $quantity;
+				$orderItem->Version = $version;
+				$orderItem->write();
+				$status = "good";
+				$response = _t("AddToCartPage.ADDED", "Added");
+			}
+		}
 		if(Director::is_ajax()) {
-			return _t("AddToCartPage.ADDED", "Added");
+			return $response;
 		}
 		else {
+			$form->setMessage($response, $status);
 			Director::redirectBack();
 		}
 	}
