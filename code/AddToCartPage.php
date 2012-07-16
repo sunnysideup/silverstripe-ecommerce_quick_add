@@ -95,28 +95,26 @@ class AddToCartPage_Controller extends Page_Controller {
 	}
 
 	function quickaddtocartform_add($data, $form) {
+		$shoppingCart = ShoppingCart::singleton();
 		$buyableID = intval($data["BuyableID"]);
 		$buyableClassName = Convert::raw2sql($data["BuyableClassName"]);
 		$version = Intval($data["Version"]);
 		$quantity = floatval($data["Quantity"]);
 		$status = "bad";
-		$response = _t("AddToCartPage.ERRORPRODUCTNOTADDED", "ERROR: Product Not Added - make sure to find a product first.");
+		$message = _t("AddToCartPage.ERRORPRODUCTNOTADDED", "ERROR: Product Not Added - make sure to find a product first.");
 		if(class_exists($buyableClassName) && EcommerceDBConfig::is_buyable($buyableClassName)) {
 			$buyable = DataObject::get_by_id($buyableClassName, $buyableID);
 			if($buyable) {
-				$orderItem = $buyable->OrderItem();
-				$orderItem->Quantity = $quantity;
-				$orderItem->Version = $version;
-				$orderItem->write();
+				$shoppingCart->addBuyable($buyable, $quantity);
 				$status = "good";
-				$response = _t("AddToCartPage.ADDED", "Added");
+				$message = _t("AddToCartPage.ADDED", "Added");
 			}
 		}
 		if(Director::is_ajax()) {
-			return $response;
+			return $shoppingCart->setMessageAndReturn($message, $status, $form);
 		}
 		else {
-			$form->setMessage($response, $status);
+			$form->setMessage($message, $status);
 			Director::redirectBack();
 		}
 	}
