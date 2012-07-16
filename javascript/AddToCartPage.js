@@ -10,7 +10,7 @@ var EcomAddToCartPage = {
 
 	loadingClass: "loading",
 	formSelector: "#QuickAddToCartFormHolder form",
-	actiomButtonSelector: "#QuickAddToCartFormHolder form .Actions input",
+	actionButtonSelector: "#QuickAddToCartFormHolder form .Actions input",
 	responseSelector: ".selectedBuyable span",
 	findBuyableFieldSelector: ".findBuyable input",
 	itemAddedText: " item added ",
@@ -38,7 +38,7 @@ var EcomAddToCartPage = {
 	// pre-submit callback
 	showRequest: function(formData, jqForm, options) {
 		jQuery(EcomAddToCartPage.responseSelector).addClass(EcomAddToCartPage.loadingClass);
-		jQuery(EcomAddToCartPage.actiomButtonSelector).hide();
+		jQuery(EcomAddToCartPage.actionButtonSelector).hide();
 		// here we could return false to prevent the form from being submitted;
 		// returning anything other than false will allow the form submit to continue
 		return true;
@@ -46,7 +46,7 @@ var EcomAddToCartPage = {
 
 	// post-submit callback
 	showResponse: function(responseText, statusText, xhr, jQueryform)  {
-		jQuery(EcomAddToCartPage.actiomButtonSelector).show();
+		jQuery(EcomAddToCartPage.actionButtonSelector).show();
 		EcomCart.setChanges(responseText, statusText);
 		jQuery(EcomAddToCartPage.findBuyableFieldSelector).focus();
 		jQuery(EcomAddToCartPage.responseSelector).html(EcomAddToCartPage.itemAddedText);
