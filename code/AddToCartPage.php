@@ -42,7 +42,7 @@ class AddToCartPage_Controller extends Page_Controller {
 		if($member && $member->IsShopAdmin()) {
 			$fields = new FieldSet(
 				new HeaderField("SelectCustomer", _t("AddToCartPage.SELECTCUSTOMER", "Select Customer")),
-				new DropdownField("MemberID", _t("AddToCartPage.CUSTOMER", "Customer"), EcommerceRole::list_of_customers()),
+				new DropdownField("MemberID", _t("AddToCartPage.CUSTOMER", "Customer"), EcommerceRole::list_of_customers(), $currentCustomer->ID),
 				new ReadonlyField("CurrentMember", _t("AddToCartPage.CURRENTCUSTOMER", "Current Customer"), $currentCustomer->getTitle())
 			);
 			$actions = new FieldSet(
