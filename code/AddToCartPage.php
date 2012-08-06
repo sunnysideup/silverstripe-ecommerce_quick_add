@@ -59,10 +59,18 @@ class AddToCartPage_Controller extends Page_Controller {
 			$order = ShoppingCart::current_order();
 			$member = DataObject::get_by_id("Member", intval($data["MemberID"]));
 			if($member) {
-				$order->MemberID = $member->ID;
-				$order->write();
-				$response = $member->getTitle()." "._t("AddToCartPage.ADDED", "Added");
-				$status = "good";
+				if($member->ID != $order->MemberID) {
+					$order->MemberID = $member->ID;
+					$order->BillingAddressID = 0;
+					$order->ShippingAddressID = 0;
+					$order->write();
+					$response = $member->getTitle()." "._t("AddToCartPage.ADDED", "customer has been added to order.");
+					$status = "good";
+				}
+				else {
+					$response = _t("AddToCartPage.NOCHANGE", "The order has not been changed.");
+					$status = "good";
+				}
 			}
 			else {
 				$response = _t("AddToCartPage.CUSTOMERNOTADDED", "Customer could not be added.");
