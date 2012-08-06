@@ -2,6 +2,7 @@
 	<div id="ContentHolder">$Content</div>
 	<div id="AddMemberToCartFormHolder">$AddMemberToCartForm</div>
 	<div id="QuickAddToCartFormHolder">$QuickAddToCartForm</div>
+	<div id="QuickAddToCartSuccessMessage">Product has been added.</div>
 	<div id="FormHolder">$Form</div>
 </div>
 

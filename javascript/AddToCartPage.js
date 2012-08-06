@@ -12,6 +12,7 @@ var EcomAddToCartPage = {
 	formSelector: "#QuickAddToCartFormHolder form",
 	actionButtonSelector: "#QuickAddToCartFormHolder form .Actions input",
 	responseSelector: ".selectedBuyable span",
+	productAddedSelected: "#QuickAddToCartSuccessMessage",
 	findBuyableFieldSelector: ".findBuyable input",
 	itemAddedText: " item added ",
 
@@ -34,6 +35,7 @@ var EcomAddToCartPage = {
 		// bind form using 'ajaxForm'
 
 		jQuery(EcomAddToCartPage.formSelector).ajaxForm(options);
+		jQuery(EcomAddToCartPage.productAddedSelected).hide();
 	},
 	// pre-submit callback
 	showRequest: function(formData, jqForm, options) {
@@ -49,7 +51,11 @@ var EcomAddToCartPage = {
 		jQuery(EcomAddToCartPage.actionButtonSelector).show();
 		EcomCart.setChanges(responseText, statusText);
 		jQuery(EcomAddToCartPage.findBuyableFieldSelector).focus();
-		jQuery(EcomAddToCartPage.responseSelector).html(EcomAddToCartPage.itemAddedText);
+		var html = jQuery(EcomAddToCartPage.productAddedSelected).html();
+		if(!html) {
+			html = EcomAddToCartPage.itemAddedText;
+		}
+		jQuery(EcomAddToCartPage.responseSelector).html(html);
 		jQuery(EcomAddToCartPage.responseSelector).removeClass(EcomAddToCartPage.loadingClass);
 		// for normal html responses, the first argument to the success callback
 		// is the XMLHttpRequest object's responseText property
@@ -61,6 +67,5 @@ var EcomAddToCartPage = {
 		// if the ajaxForm method was passed an Options Object with the dataType
 		// property set to 'json' then the first argument to the success callback
 		// is the json data object returned by the server
-
 	}
 }

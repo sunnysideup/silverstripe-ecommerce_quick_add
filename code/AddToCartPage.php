@@ -65,7 +65,7 @@ class AddToCartPage_Controller extends Page_Controller {
 				$status = "good";
 			}
 			else {
-				$response = _t("AddToCartPage.CUSTOMERNOTADDED", "Customer could not be added");
+				$response = _t("AddToCartPage.CUSTOMERNOTADDED", "Customer could not be added.");
 				$status = "bad";
 			}
 			if(Director::is_ajax()) {
