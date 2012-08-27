@@ -42,11 +42,11 @@ class AddToCartPage_Controller extends Page_Controller {
 		if($member && $member->IsShopAdmin()) {
 			$fields = new FieldSet(
 				new HeaderField("SelectCustomer", _t("AddToCartPage.SELECTCUSTOMER", "Select Customer")),
-				new DropdownField("MemberID", _t("AddToCartPage.CUSTOMER", "Customer"), EcommerceRole::list_of_customers(), $currentCustomer->ID),
-				new ReadonlyField("CurrentMember", _t("AddToCartPage.CURRENTCUSTOMER", "Current Customer"), $currentCustomer->getTitle())
+				new ReadonlyField("CurrentMember", _t("AddToCartPage.CURRENTCUSTOMER", "Current Customer"), $currentCustomer->getTitle()),
+				new DropdownField("MemberID", _t("AddToCartPage.CUSTOMER", "Customer"), EcommerceRole::list_of_customers(), $currentCustomer->ID)
 			);
 			$actions = new FieldSet(
-				new FormAction("addmembertocartform_add", _t("AddToCartPage.ADDMEMBERTOORDER", "Add customer to current order"))
+				new FormAction("addmembertocartform_add", _t("AddToCartPage.ADDMEMBERTOORDER", "Update customer"))
 			);
 			$validator = new RequiredFields(array("MemberID"));
 			return new Form($this, "AddMemberToCartForm", $fields, $actions, $validator);
@@ -88,7 +88,7 @@ class AddToCartPage_Controller extends Page_Controller {
 
 	function QuickAddToCartForm(){
 		$fields = new FieldSet(
-			new HeaderField("SelectCustomer", _t("AddToCartPage.ADDPRODUCTS", "Add Products")),
+			new HeaderField("SelectCustomer", _t("AddToCartPage.ADDPRODUCTS", "Add Products to your order")),
 			new HiddenField("BuyableID"),
 			new HiddenField("BuyableClassName"),
 			new HiddenField("Version"),
