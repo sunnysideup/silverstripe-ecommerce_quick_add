@@ -1,0 +1,21 @@
+{
+	"name": "silverstripe/ecommerce_quick_add",
+	"type": "silverstripe-module",
+	"description": "Adds a page type to e-commerce that allows you to view all products at once for 'quickly' adding them to your cart",
+	"homepage": "http://www.silverstripe-ecommerce.com",
+	"keywords": ["ecommerce", "e-commerce", "shop", "quick add", "silverstripe"],
+	"license": "Sunny Side Up (BSD-3-Clause and CUSTOM)",
+	"authors":[
+		{
+			"name": "Nicolaas Francken",
+			"homepage": "https://github.com/sunnysideup",
+			"email" : "modules@sunnysideup.co.nz",
+			"role" : "lead developer"
+		}
+	],
+	"require":{
+		"php": ">=5.3.2",
+		"silverstripe/framework": ">=2.4.0",
+		"silverstripe/ecommerce": ">=2.4.0"
+	}
+}
