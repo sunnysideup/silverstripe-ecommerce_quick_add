@@ -8,13 +8,13 @@
 
 class AddToCartPage extends Page {
 
-	public static $icon = "ecommerce_quick_add/images/treeicons/AddToCartPage";
+	private static $icon = "ecommerce_quick_add/images/treeicons/AddToCartPage";
 
 	public function canCreate($member = null){
-		return !DataObject::get_one("AddToCartPage", "\"ClassName\" = 'AddToCartPage'");
+		return AddToCartPage::get()->count() ? false : true;
 	}
 
-	public static $many_many = array(
+	private static $many_many = array(
 		"ExcludedProductsAndGroups" => "SiteTree",
 	);
 
@@ -23,6 +23,12 @@ class AddToCartPage extends Page {
 
 class AddToCartPage_Controller extends Page_Controller {
 
+	private static $allowed_actions = array(
+		"AddMemberToCartForm" => true,
+		"addmembertocartform_add" => true,
+		"QuickAddToCartForm" => true,
+		"quickaddtocartform_add" => true
+	);
 
 	function init() {
 		parent::init();
@@ -36,16 +42,16 @@ class AddToCartPage_Controller extends Page_Controller {
 	}
 
 	function AddMemberToCartForm(){
-		$member = Member::currentMember();
+		$member = Member::currentUser();
 		$order = ShoppingCart::current_order();
 		$currentCustomer = $order->CreateOrReturnExistingMember(false);
 		if($member && $member->IsShopAdmin()) {
-			$fields = new FieldSet(
+			$fields = new FieldList(
 				new HeaderField("SelectCustomer", _t("AddToCartPage.SELECTCUSTOMER", "Select Customer")),
 				new ReadonlyField("CurrentMember", _t("AddToCartPage.CURRENTCUSTOMER", "Current"), $currentCustomer->getTitle()),
 				new DropdownField("MemberID", _t("AddToCartPage.CUSTOMER", "Change to"), EcommerceRole::list_of_customers(), $currentCustomer->ID)
 			);
-			$actions = new FieldSet(
+			$actions = new FieldList(
 				new FormAction("addmembertocartform_add", _t("AddToCartPage.ADDMEMBERTOORDER", "Update customer"))
 			);
 			$validator = new RequiredFields(array("MemberID"));
@@ -54,10 +60,10 @@ class AddToCartPage_Controller extends Page_Controller {
 	}
 
 	function addmembertocartform_add($data, $form) {
-		$member = Member::currentMember();
+		$member = Member::currentUser();
 		if($member && $member->IsShopAdmin()) {
 			$order = ShoppingCart::current_order();
-			$member = DataObject::get_by_id("Member", intval($data["MemberID"]));
+			$member = Member::get()->byID(intval($data["MemberID"]));
 			if($member) {
 				if($member->ID != $order->MemberID) {
 					$order->MemberID = $member->ID;
@@ -81,13 +87,13 @@ class AddToCartPage_Controller extends Page_Controller {
 			}
 			else {
 				$form->setMessage($response, $status);
-				Director::redirectBack();
+				$this->redirectBack();
 			}
 		}
 	}
 
 	function QuickAddToCartForm(){
-		$fields = new FieldSet(
+		$fields = new FieldList(
 			new HeaderField("SelectCustomer", _t("AddToCartPage.ADDPRODUCTS", "Add Products to your order")),
 			new HiddenField("BuyableID"),
 			new HiddenField("BuyableClassName"),
@@ -95,7 +101,7 @@ class AddToCartPage_Controller extends Page_Controller {
 			new BuyableSelectField("FindBuyable", _t("AddToCartPage.PRODUCT", "Product")),
 			new NumericField("Quantity", _t("AddToCartPage.QUANTITY", "Quantity"), 1)
 		);
-		$actions = new FieldSet(
+		$actions = new FieldList(
 			new FormAction("quickaddtocartform_add", _t("AddToCartPage.ADD", "Add"))
 		);
 		$validator = new RequiredFields(array("Quantity"));
@@ -111,7 +117,7 @@ class AddToCartPage_Controller extends Page_Controller {
 		$status = "bad";
 		$message = _t("AddToCartPage.ERRORPRODUCTNOTADDED", "ERROR: Product Not Added - make sure to find a product first.");
 		if(class_exists($buyableClassName) && EcommerceDBConfig::is_buyable($buyableClassName)) {
-			$buyable = DataObject::get_by_id($buyableClassName, $buyableID);
+			$buyable = $buyableClassName::get()->byID($buyableID);
 			if($buyable) {
 				$shoppingCart->addBuyable($buyable, $quantity);
 				$status = "good";
@@ -123,7 +129,7 @@ class AddToCartPage_Controller extends Page_Controller {
 		}
 		else {
 			$form->setMessage($message, $status);
-			Director::redirectBack();
+			$this->redirectBack();
 		}
 	}
 
