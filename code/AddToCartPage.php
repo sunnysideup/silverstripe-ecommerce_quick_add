@@ -32,8 +32,8 @@ class AddToCartPage_Controller extends Page_Controller {
 
 	function init() {
 		parent::init();
-		Requirements::themedCSS('Products');
-		Requirements::themedCSS('AddToCartPage');
+		Requirements::themedCSS('Products', 'ecommerce');
+		Requirements::themedCSS('AddToCartPage', 'ecommerce_quick_add');
 		Requirements::javascript(THIRDPARTY_DIR."/jquery/jquery.js");
 		//Requirements::block(THIRDPARTY_DIR."/jquery/jquery.js");
 		//Requirements::javascript(Director::protocol()."ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js");
