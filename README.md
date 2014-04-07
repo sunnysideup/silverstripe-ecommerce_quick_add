@@ -1,7 +1,6 @@
-###############################################
+
 ecommerce quick add
-Pre 0.1 proof of concept
-###############################################
+================================================================================
 
 Adds a page to e-commerce, which allows quick addition
 of many products to cart. This is useful if you have
